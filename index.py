@@ -161,7 +161,10 @@ try:
                         elif fetched[channel_name][video_id]["skipPrivateCheck"]:
                             continue
 
-                        status = utils.get_video_status(video_id)
+                        try:
+                            status = utils.get_video_status(video_id)
+                        except TimeoutError as e:
+                            utils.warn(f"[{channel_name}] {video_id} has timed out. Ignoring...")
 
                         if status is utils.PlayabilityStatus.OK:
                             continue
