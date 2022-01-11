@@ -197,6 +197,9 @@ try:
             except urllib.error.HTTPError as e:
                 utils.warn(f" got HTTPError when checking live status for channel \"{channel_id}\". {e}")
                 is_live = False
+            except TimeoutError as e:
+                utils.warn(f" got TimeoutError when checking live status for channel \"{channel_id}\". {e}")
+                is_live = False
             if is_live:
                 utils.log(f"[{channel_name}] On live!")
 
